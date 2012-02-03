@@ -124,6 +124,6 @@ public class EmailSender {
 			sender.sendMailWithSSL("dummy", "webdemo2012@gmail.com");
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}  
 	}
 }
