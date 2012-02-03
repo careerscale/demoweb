@@ -10,6 +10,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.log4j.Logger;
+
+import com.pec.log.LogFactory;
+
 /**
  * refer for gmail authentication details.
  * http://www.mkyong.com/java/javamail-api-sending-email-via-gmail-smtp-example/
@@ -19,6 +23,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class EmailSender {
 
+	private static Logger logger = LogFactory.getLogger();
 	private static final String host = "smtp.gmail.com";
 	private static final int SSLport = 465;
 	private static final int smtpPort = 587;
@@ -58,7 +63,8 @@ public class EmailSender {
 
 			Transport.send(message);
 
-			System.out.println("Done");
+			logger.info("DONE sending email with TLS"); 
+			
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
@@ -101,8 +107,8 @@ public class EmailSender {
 			transport.connect(host,SSLport,username, password);
 			
 			Transport.send(message);
-
-			System.out.println("Done");
+			logger.info("DONE sending email with SSL"); 
+			
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
@@ -118,12 +124,13 @@ public class EmailSender {
 		try {
 			sender.sendEmail("dummy", "webdemo2012@gmail.com");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error while sending email with TLS", e);
+			
 		}
 		try {
 			sender.sendMailWithSSL("dummy", "webdemo2012@gmail.com");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error while sending email with TLS", e);
 		}  
 	}
 }

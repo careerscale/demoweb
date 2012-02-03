@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.apache.log4j.Logger;
+
+import com.pec.log.LogFactory;
+
 public class LoginDAO {
 	
+	private static Logger logger = LogFactory.getLogger();
 	public boolean login(String username, String pwd) throws Exception{
 		boolean result =false;
 		
@@ -22,7 +27,8 @@ public class LoginDAO {
 	public static void main(String[] args) throws Exception {
 		LoginDAO dao = new LoginDAO();
 		boolean result =dao.login("harinath","secret");
-		System.out.println("user authentication status" + result);
+		
+		logger.info("user authentication status  " + result);
 	}
 
 	public boolean resetPassword(String userName, String password) {

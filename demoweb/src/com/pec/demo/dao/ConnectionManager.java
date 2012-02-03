@@ -3,14 +3,19 @@ package com.pec.demo.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import org.apache.log4j.Logger;
+
+import com.pec.log.LogFactory;
+
 public class ConnectionManager {
+	
+	private static Logger logger = LogFactory.getLogger();
 	
 	static{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (ClassNotFoundException cne) {
+			logger.error("Unable to load driver", cne);
 		}
 	}
 	public static Connection getDbConnection() throws Exception{

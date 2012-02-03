@@ -8,19 +8,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.pec.demo.dao.LoginDAO;
+import com.pec.log.LogFactory;
 
 /**
  * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static Logger logger = LogFactory.getLogger();
     /**
      * Default constructor. 
      */
     public LoginServlet() {
-        // TODO Auto-generated constructor stub
+       
     }
 
 	/**
@@ -43,8 +46,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			loginStatus = dao.login(username, password);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Error while login ", e);
 		}
 		
 		PrintWriter writer = response.getWriter();
