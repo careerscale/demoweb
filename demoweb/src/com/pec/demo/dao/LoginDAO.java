@@ -16,8 +16,8 @@ public class LoginDAO {
 		
 		Connection con =ConnectionManager.getDbConnection();
 		Statement stmt =con.createStatement();
-		//ResultSet results =stmt.executeQuery("select * from user where username='" + username + "' and password ='" + pwd +"'");
-		ResultSet results =stmt.executeQuery("select * from user where username='" + username + "'");
+		ResultSet results =stmt.executeQuery("select * from user where username='" + username + "' and password ='" + pwd +"'");
+		//ResultSet results =stmt.executeQuery("select * from user where username='" + username + "'");
 		while(results.next()){
 			result = true;
 		}

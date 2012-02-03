@@ -3,10 +3,12 @@ package com.pec.demo.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -19,27 +21,32 @@ import com.pec.log.LogFactory;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LogFactory.getLogger();
-    /**
-     * Default constructor. 
-     */
-    public LoginServlet() {
-       
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Default constructor.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter writer = response.getWriter();
 		writer.write("Hello" + request.getParameter("first"));
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username =request.getParameter("userId");
-		
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("userId");
+
 		String password = request.getParameter("password");
 		LoginDAO dao = new LoginDAO();
 		boolean loginStatus = false;
@@ -48,10 +55,21 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			logger.error("Error while login ", e);
 		}
-		
-		PrintWriter writer = response.getWriter();
-		writer.write("Login status is " + loginStatus);
-		
+
+		HttpSession session = request.getSession();
+		if (loginStatus == true) {
+			session.setAttribute("username", username);
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/home.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			// redirect to login page again with error message.
+			// for now just print error message
+
+			PrintWriter writer = response.getWriter();
+			writer.write("Invalid username /password, Please try again");
+
+		}
 	}
 
 }
