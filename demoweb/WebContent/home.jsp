@@ -9,7 +9,7 @@
 <body>
 	<table width="960px" align="center">
 		<tr valign='top'>
-			<td width="100px"><%@include file='sidebar.jsp'%></td>
+			
 			<td><table>
 					<tr>
 						<td><%@include file='header.jsp'%></td>

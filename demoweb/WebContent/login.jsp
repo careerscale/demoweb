@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Demo Login Page</title>
-<link rel="stylesheet" type="text/css" href="css/demo.css" />
+<%@include file='common.jsp'%>
 
 </head>
 <body>
