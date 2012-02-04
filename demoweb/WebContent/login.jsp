@@ -7,13 +7,14 @@
 
 </head>
 <body>
-	<div class="header">
-		<h2>Welcome to Demo Login</h2>
-	</div>
 
-	<form action="/demoweb/login" method="post">
+  
+	<div  class="headerDiv">Welcome to Demo Login </div>
 
-		<div class="form">
+
+	<form action="/demoWeb/login" method="post">
+
+		<div class="formDiv">
 
 			<table>
 				<tr>

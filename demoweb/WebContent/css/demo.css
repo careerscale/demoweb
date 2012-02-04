@@ -31,10 +31,24 @@ address {
   padding-top: 1em;
   border-top: thin dotted }
   
- div. form{
+ div.headerDiv {
   margin-top: 1em;
   padding-top: 1em;
   border-top:  thick ;
-  border-color: blue;
+  border-color: black;
+  font-size: large;
+  border-width: thick;
+  
   
   }
+  
+  div.formDiv{
+  margin-top: 1em;
+  padding-top: 1em;
+  
+  font:italic;
+  color:  yellow; 
+  
+  }
+  
+  
