@@ -3,7 +3,9 @@ body {
   font-family: Georgia, "Times New Roman",
         Times, serif;
   color: purple;
-  background-color: #d8da3d }
+  background-image: -moz-radial-gradient(center, ellipse farthest-corner, #FFFFFF 0%, #00A3EF 100%);
+  
+  }
 ul.navbar {
   list-style-type: none;
   padding: 0;
@@ -42,13 +44,19 @@ address {
   
   }
   
-  div.formDiv{
+  div.loginForm{
   margin-top: 1em;
   padding-top: 1em;
-  
+    border: 1px solid black;
   font:italic;
-  color:  yellow; 
-  
+  color:  navy; 
+  width: 400px;
+  vertical-align: middle;
   }
   
+  div.errorMessage{
+  color: maroon;
+  font:italic,bold;
+  vertical-align: middle;
+  }
   

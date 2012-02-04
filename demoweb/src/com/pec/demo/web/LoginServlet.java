@@ -63,12 +63,12 @@ public class LoginServlet extends HttpServlet {
 					.getRequestDispatcher("/home.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			// redirect to login page again with error message.
-			// for now just print error message
-
-			PrintWriter writer = response.getWriter();
-			writer.write("Invalid username /password, Please try again");
-
+			//session.setAttribute("error", "User name or password is invalid");
+			request.setAttribute("error", "User name or password is invalid");
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/login.jsp");
+			dispatcher.forward(request, response);
+	
 		}
 	}
 

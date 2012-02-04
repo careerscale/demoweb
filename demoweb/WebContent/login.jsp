@@ -7,33 +7,64 @@
 
 </head>
 <body>
+	<table width="960px" align="center">
+		<tr valign='top'>
+			<td width="100px" ><%@include file='sidebar.jsp'%></td>
+			<td><table>
+					<tr>
+						<td><%@include file='header.jsp'%></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="headerDiv">Welcome to Demo Login</div>
+							<form action="login" method="post">
+								<div class="loginForm" align="center">
 
-  
-	<div  class="headerDiv">Welcome to Demo Login </div>
+									<table>
+										<tr>
+											<td colspan="2">
+												<!--  Let us show errors here -->
+												<div class="errorMessage" align="center">
+												<%
+												 if(request.getAttribute("error") != null){
+													 out.print(request.getAttribute("error"));
+												 }
+												%>													
+													<br />
+												</div>
+											</td>
+										<tr>
+											<td>User name</td>
+											<td><input type="text" id="userId" name="userId" /></td>
+										</tr>
+
+										<tr>
+											<td>Password</td>
+
+											<td><input type="password" name="password" /></td>
+										</tr>
+
+										<tr>
+											<td colspan="2" abbr="right"><input type="submit"
+												name="login" value="Login" /></td>
+										</tr>
+									</table>
+								</div>
+							</form>
+						</td>
+					</tr>
+					<tr>
+					<td>
+					<%@include file='howto.html'%>
+					</td>
+					</tr>
+					<tr>
+						<td><%@include file='footer.jsp'%></td>
+					</tr>
+				</table></td>
+		</tr>
+	</table>
 
 
-	<form action="/demoWeb/login" method="post">
-
-		<div class="formDiv">
-
-			<table>
-				<tr>
-					<td>User name</td>
-					<td><input type="text" id="userId" name="userId" /></td>
-				</tr>
-
-				<tr>
-					<td>Password</td>
-
-					<td><input type="password" name="password" /></td>
-				</tr>
-
-				<tr>
-					<td colspan="2" abbr="right"><input type="submit" name="login"
-						value="Login" /></td>
-				</tr>
-			</table>
-		</div>
-	</form>
 </body>
 </html>
