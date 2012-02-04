@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Demo Login Page</title>
+<title>Demo Registration Page</title>
 <%@include file='common.jsp'%>
 
 <script type="text/javascript">
