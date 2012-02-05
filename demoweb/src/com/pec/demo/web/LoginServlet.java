@@ -35,9 +35,10 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter writer = response.getWriter();
-		writer.write("Hello" + request.getParameter("first"));
-	}
+		RequestDispatcher dispatcher = getServletContext()
+				.getRequestDispatcher("/login.jsp");
+		dispatcher.forward(request, response);
+}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

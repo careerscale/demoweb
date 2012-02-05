@@ -10,7 +10,7 @@ import com.pec.log.LogFactory;
 public class ConnectionManager {
 
 	private static Logger logger = LogFactory.getLogger();
-	private static final String conString = "jdbc:mysql://localhost:3306/test";
+	private static final String conString = "jdbc:mysql://localhost:3306/demoweb";
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
