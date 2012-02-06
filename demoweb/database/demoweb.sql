@@ -2,6 +2,9 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+DROP SCHEMA IF EXISTS `demoweb` ;
+CREATE SCHEMA IF NOT EXISTS `demoweb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+USE `demoweb` ;
 
 -- -----------------------------------------------------
 -- Table `profession`
@@ -18,8 +21,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `state` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NULL ,
-  PRIMARY KEY (`id`) )
+  `name` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) )
 ENGINE = InnoDB;
 
 
@@ -61,7 +65,8 @@ CREATE  TABLE IF NOT EXISTS `role` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NULL ,
   `description` VARCHAR(255) NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) )
 ENGINE = InnoDB;
 
 
@@ -94,7 +99,8 @@ CREATE  TABLE IF NOT EXISTS `email_template` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(45) NOT NULL ,
   `template` MEDIUMTEXT  NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) )
 ENGINE = InnoDB;
 
 
@@ -102,3 +108,46 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `profession`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `profession` (`id`, `name`) VALUES (NULL, 'Doctor');
+INSERT INTO `profession` (`id`, `name`) VALUES (NULL, 'Software Professional');
+INSERT INTO `profession` (`id`, `name`) VALUES (NULL, 'Business ');
+INSERT INTO `profession` (`id`, `name`) VALUES (NULL, 'Student');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `state`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `state` (`id`, `name`) VALUES (1, 'Andhra Pradesh');
+INSERT INTO `state` (`id`, `name`) VALUES (2, 'Tamil Nadu');
+INSERT INTO `state` (`id`, `name`) VALUES (3, 'Karnataka');
+INSERT INTO `state` (`id`, `name`) VALUES (4, 'Delhi');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `role`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `role` (`id`, `name`, `description`) VALUES (NULL, 'admin', 'admin user account');
+INSERT INTO `role` (`id`, `name`, `description`) VALUES (NULL, 'user', 'normal user');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `email_template`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `email_template` (`id`, `name`, `template`) VALUES (1, 'registration', 'Dear $$first_name$$, Welcome to demo web application.  Regards, Harinath, Administrator');
+
+COMMIT;
