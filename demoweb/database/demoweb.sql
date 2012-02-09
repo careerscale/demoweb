@@ -130,6 +130,7 @@ INSERT INTO `state` (`id`, `name`) VALUES (1, 'Andhra Pradesh');
 INSERT INTO `state` (`id`, `name`) VALUES (2, 'Tamil Nadu');
 INSERT INTO `state` (`id`, `name`) VALUES (3, 'Karnataka');
 INSERT INTO `state` (`id`, `name`) VALUES (4, 'Delhi');
+INSERT INTO `state` (`id`, `name`) VALUES (5, 'Orissa');
 
 COMMIT;
 

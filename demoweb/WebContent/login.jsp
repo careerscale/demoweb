@@ -5,6 +5,8 @@
 <title>Demo Login Page</title>
 <%@include file='common.jsp'%>
 
+<script type="text/javascript">
+
 </head>
 <body>
 	<table width="960px" align="center">
@@ -17,7 +19,7 @@
 					<tr>
 						<td>
 							<div class="headerDiv">Welcome to Demo Login</div>
-							<form action="login" method="post">
+							<form id="loginForm" action="login" method="post">
 								<div class="loginForm" align="center">
 
 									<table>

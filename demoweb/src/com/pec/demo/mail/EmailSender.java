@@ -77,7 +77,7 @@ public class EmailSender {
 	 * @param template the template name to be used.
 	 * @param email the email id to which the mail need to be sent.
 	 */
-	public void sendMailWithSSL(String template, String email) {
+	public static void sendMailWithSSL(String subject, String body, String email) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", SSLport);
@@ -99,9 +99,8 @@ public class EmailSender {
 			message.setFrom(new InternetAddress(from));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(email));
-			message.setSubject("Testing Subject");
-			message.setText("Dear Mail Crawler,"
-					+ "\n\n No spam to my email, please!");
+			message.setSubject(subject);
+			message.setText(body);
 
 			Transport transport = session.getTransport("smtp");
 			transport.connect(host,SSLport,username, password);
@@ -121,14 +120,16 @@ public class EmailSender {
 	 */
 	public static void main(String[] args) {
 		EmailSender sender = new EmailSender();
-		try {
+		//commented next lines to skip the erring code.
+		//TODO when bandwidth is available fix it.
+	/*	try {
 			sender.sendEmail("dummy", "webdemo2012@gmail.com");
 		} catch (Exception e) {
 			logger.error("Error while sending email with TLS", e);
 			
 		}
-		try {
-			sender.sendMailWithSSL("dummy", "webdemo2012@gmail.com");
+	*/	try {
+			sender.sendMailWithSSL("subject ","Message body", "webdemo2012@gmail.com");
 		} catch (Exception e) {
 			logger.error("Error while sending email with TLS", e);
 		}  
