@@ -65,8 +65,8 @@
 
 											dob : {
 												required : true,
-												minlength : 10,
-
+												minlength : 10
+												
 											},
 
 											messages : {
@@ -116,7 +116,7 @@
 				<form class="cmxform" id="signupForm" method="post"
 					action="register">
 					<fieldset>
-						<legend>Welcome to Demo registration form</legend>
+						<legend>Welcome to Login</legend>
 						<p>
 							<!--  Let us show errors here -->
 						<div class="errorMessage" align="center">

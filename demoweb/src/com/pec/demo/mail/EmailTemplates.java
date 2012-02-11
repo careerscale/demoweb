@@ -17,9 +17,19 @@ public class EmailTemplates {
 	"India\n" +
 	"http://localhost:8080/demoweb";	
 	
+	private static String forgotPasswordTemplate ="Dear ${firstName}, \n We have received your forgot password request." +
+			"Please click the link below to reset your password \n"+
+			"http://localhost:8080/demoweb/forgotPassword?username=${username}&activationCode=${activationCode}"+
+			"\nRegards, \n"+
+			"Administrator\n"+
+			"DemoWeb\n"+
+			"India\n" +
+			"http://localhost:8080/demoweb";
+	
 	public static final String firstName ="firstName";
 	public static final String userName="username";
 	public static final String password ="password";
+	public static final String activationCode ="activationCode";
 	
 	public static String getEmailMessage(Template template, Map<String,String> valuesMap){
 		
@@ -31,7 +41,7 @@ public class EmailTemplates {
 			resolvedString = sub.replace(registrationTemplate);
 			break;
 		case ForgotPassword:
-			//TODO implement the logic here.
+			resolvedString = sub.replace(forgotPasswordTemplate);
 			break;
 		default:
 			//Unsupported template

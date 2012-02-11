@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.pec.demo.dao.LoginDAO;
+import com.pec.demo.service.LoginService;
 import com.pec.log.LogFactory;
 
 /**
@@ -21,6 +22,7 @@ import com.pec.log.LogFactory;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static Logger logger = LogFactory.getLogger();
+	private LoginService service = null;
 
 	/**
 	 * Default constructor.
@@ -38,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher("/login.jsp");
 		dispatcher.forward(request, response);
-}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -46,9 +48,22 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("userId");
-
+        service = new LoginService();
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		if (request.getParameter("forgot") != null) {
+			try {
+				service.sendPasswordDetails(username);
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+			}
+			RequestDispatcher dispatcher = getServletContext()
+					.getRequestDispatcher("/forgotpwd.jsp");
+			dispatcher.forward(request, response);
+			return;
+
+		}
+
 		LoginDAO dao = new LoginDAO();
 		boolean loginStatus = false;
 		try {
@@ -64,12 +79,13 @@ public class LoginServlet extends HttpServlet {
 					.getRequestDispatcher("/home.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			//session.setAttribute("error", "User name or password is invalid");
+			// session.setAttribute("error",
+			// "User name or password is invalid");
 			request.setAttribute("error", "User name or password is invalid");
 			RequestDispatcher dispatcher = getServletContext()
 					.getRequestDispatcher("/login.jsp");
 			dispatcher.forward(request, response);
-	
+
 		}
 	}
 

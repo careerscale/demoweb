@@ -4,14 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Demo Login Page</title>
 <%@include file='common.jsp'%>
-
 <script type="text/javascript">
+	$()
+			.ready(
+					function() {
+						// validate signup form on keyup and submit
+						$("#loginForm")
+								.validate(
+										{
+											rules : {
+												username : {
+													required : true,
+													minlength : 2
+												},
+												password : {
+													required : true,
+													minlength : 5
+												},
+												messages : {
+													username : {
+														required : "Please enter a username",
+														minlength : "Your username must consist of at least 2 characters"
+													},
+													password : {
+														required : "Please provide a password",
+														minlength : "Your password must be at least 5 characters long"
+													}
+												}
+											}
+										});
+					});
+</script>
+
 
 </head>
 <body>
 	<table width="960px" align="center">
 		<tr valign='top'>
-			<td width="100px" ><%@include file='sidebar.jsp'%></td>
+			<td width="100px"><%@include file='sidebar.jsp'%></td>
 			<td><table>
 					<tr>
 						<td><%@include file='header.jsp'%></td>
@@ -19,46 +49,42 @@
 					<tr>
 						<td>
 							<div class="headerDiv">Welcome to Demo Login</div>
-							<form id="loginForm" action="login" method="post">
-								<div class="loginForm" align="center">
+							<form class="cmxform" id="loginForm" method="post" action="login">
+								<fieldset>
+									<legend>Welcome to Demo registration form</legend>
 
-									<table>
-										<tr>
-											<td colspan="2">
-												<!--  Let us show errors here -->
-												<div class="errorMessage" align="center">
-												<%
-												 if(request.getAttribute("error") != null){
-													 out.print(request.getAttribute("error"));
-												 }
-												%>													
-													<br />
-												</div>
-											</td>
-										<tr>
-											<td>User name</td>
-											<td><input type="text" id="userId" name="userId" /></td>
-										</tr>
-
-										<tr>
-											<td>Password</td>
-
-											<td><input type="password" name="password" /></td>
-										</tr>
-
-										<tr>
-											<td colspan="2" abbr="right"><input type="submit"
-												name="login" value="Login" /></td>
-										</tr>
-									</table>
-								</div>
+									<!--  Let us show errors here -->
+									<div class="errorMessage" align="center">
+										<%
+											if (request.getAttribute("error") != null) {
+												out.print(request.getAttribute("error"));
+											}
+										%>
+									</div>									
+									<p>
+										<label for="username">Username</label> <input id="username"
+											name="username"
+											value=<%=request.getParameter("username") == null ? "''" : "'"
+					+ request.getParameter("username") + "'"%> />
+									</p>
+									<p>
+										<label for="password">Password</label> <input id="password"
+											name="password" type="password" />
+									</p>
+									<p>
+										<input class="submit"  type="submit" value="Submit"  name="submit" /> &nbsp; &nbsp;&nbsp;
+										<input class="cancel"  type="submit" name="forgot" value="Forgot Password" />
+									</p>
+									<p>
+										Do not have account? <a href="register">Click Here</a> to create one.
+									</p>
+								</fieldset>
 							</form>
+
 						</td>
 					</tr>
 					<tr>
-					<td>
-					<%@include file='howto.html'%>
-					</td>
+						<td><%@include file='howto.html'%></td>
 					</tr>
 					<tr>
 						<td><%@include file='footer.jsp'%></td>

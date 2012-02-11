@@ -28,6 +28,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `status`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `status` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `user` (
@@ -41,10 +51,14 @@ CREATE  TABLE IF NOT EXISTS `user` (
   `address_line` VARCHAR(80) NULL ,
   `profession_id` INT NULL ,
   `state_id` INT NULL ,
+  `status_id` INT NOT NULL DEFAULT 0 ,
+  `password_fail_count` INT NULL ,
+  `activation_code` INT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
   INDEX `fk_user_profession_id` (`profession_id` ASC) ,
   INDEX `fk_user_state_id` (`state_id` ASC) ,
+  INDEX `fk_user_status_id` (`status_id` ASC) ,
   CONSTRAINT `fk_user_profession_id`
     FOREIGN KEY (`profession_id` )
     REFERENCES `profession` (`id` )
@@ -53,6 +67,11 @@ CREATE  TABLE IF NOT EXISTS `user` (
   CONSTRAINT `fk_user_state_id`
     FOREIGN KEY (`state_id` )
     REFERENCES `state` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_status_id`
+    FOREIGN KEY (`status_id` )
+    REFERENCES `status` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -131,6 +150,26 @@ INSERT INTO `state` (`id`, `name`) VALUES (2, 'Tamil Nadu');
 INSERT INTO `state` (`id`, `name`) VALUES (3, 'Karnataka');
 INSERT INTO `state` (`id`, `name`) VALUES (4, 'Delhi');
 INSERT INTO `state` (`id`, `name`) VALUES (5, 'Orissa');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `status`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `status` (`id`, `name`) VALUES (1, 'Pending');
+INSERT INTO `status` (`id`, `name`) VALUES (2, 'Active');
+INSERT INTO `status` (`id`, `name`) VALUES (3, 'Locked');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `user`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `user` (`id`, `username`, `password`, `first_name`, `last_name`, `dob`, `email_id`, `address_line`, `profession_id`, `state_id`, `status_id`, `password_fail_count`, `activation_code`) VALUES (1, 'admin', '5a105e8b9d40e1329780d62ea2265d8a', 'Harinath', 'Mallepally', '01/01/1979', 'hari@harinath.in', 'hyderbad', NULL, 1, 2, 0, NULL);
 
 COMMIT;
 

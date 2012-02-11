@@ -23,10 +23,7 @@ public class RegistrationDAO {
 		Statement stmt = con.createStatement();
 		ResultSet results = stmt
 				.executeQuery("select * from user where username='" + username
-						+ "' and password ='" + pwd + "'");
-		// ResultSet results
-		// =stmt.executeQuery("select * from user where username='" + username +
-		// "'");
+						+ "' and password ='" + pwd + "'");	
 		while (results.next()) {
 			result = true;
 		}
@@ -37,8 +34,7 @@ public class RegistrationDAO {
 			String password, String email, String dob) throws Exception {
 		con = ConnectionManager.getDbConnection();
 		PreparedStatement stmt = con
-				.prepareStatement("insert into user(username, password, first_name, last_name,email_id,dob) values(?,?,?,?,?,?)");
-
+				.prepareStatement("insert into user(username, password, first_name, last_name,email_id,dob,status_id) values(?,?,?,?,?,?,1)");
 		stmt.setString(1, userName);
 		stmt.setString(2, CommonUtils.getEncryptedPassword(password));
 		stmt.setString(3, firstName);

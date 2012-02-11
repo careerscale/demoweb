@@ -39,4 +39,14 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ForgotPasswordServlet</display-name>
+    <servlet-name>ForgotPasswordServlet</servlet-name>
+    <servlet-class>com.pec.demo.web.ForgotPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPasswordServlet</servlet-name>
+    <url-pattern>/forgotPassword</url-pattern>
+  </servlet-mapping>
 </web-app>

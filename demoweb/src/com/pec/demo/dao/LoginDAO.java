@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
+import com.pec.demo.model.User;
 import com.pec.demo.util.CommonUtils;
 import com.pec.log.LogFactory;
 
@@ -24,6 +25,31 @@ public class LoginDAO {
 		}
 		return result;
 	}
+
+	public boolean resetPassword(String userName, String password) {
+		
+		return true;
+	}
+
+	public User getUserByUserName(String username) {
+		User user = null;
+		try{
+		Connection con =ConnectionManager.getDbConnection();
+		Statement stmt =con.createStatement();
+		ResultSet results =stmt.executeQuery("select * from user where username='" + username + "'");
+		//ResultSet results =stmt.executeQuery("select * from user where username='" + username + "'");
+		
+		while(results.next()){
+			user = new User(results.getString("username"),results.getString("email_id"),results.getString("first_name"),results.getString("last_name"));
+		}
+		}catch(Exception e){
+			
+		}
+		return user;
+
+		
+	}
+	
 	
 	public static void main(String[] args) throws Exception {
 		LoginDAO dao = new LoginDAO();
@@ -32,9 +58,5 @@ public class LoginDAO {
 		logger.info("user authentication status  " + result);
 	}
 
-	public boolean resetPassword(String userName, String password) {
-		
-		return true;
-	}
 
 }
