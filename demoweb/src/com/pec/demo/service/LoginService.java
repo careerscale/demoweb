@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.log4j.Logger;
 
 import com.pec.demo.dao.LoginDAO;
 import com.pec.demo.exceptions.ApplicationException;
@@ -11,9 +12,22 @@ import com.pec.demo.mail.EmailSender;
 import com.pec.demo.mail.EmailTemplates;
 import com.pec.demo.mail.Template;
 import com.pec.demo.model.User;
+import com.pec.log.LogFactory;
 
 public class LoginService {
-	LoginDAO dao = new LoginDAO();
+	private static Logger logger = LogFactory.getLogger();
+	private LoginDAO dao = new LoginDAO();
+	
+	
+	public boolean login(String userName, String password) throws ApplicationException{
+		try {
+			return dao.login(userName, password);
+		} catch (Exception e) {
+			logger.error("unable to login for user " + userName , e);
+			throw new ApplicationException("Unable to login with user name" + userName);
+		
+		}
+	}
 	public boolean resetPassword(
 			String userName,
 			String password,
@@ -25,7 +39,7 @@ public class LoginService {
 		 return result;
 	}
 	
-	
+
 	public void sendPasswordDetails(String username) throws ApplicationException{
 		User user =dao.getUserByUserName(username);
 		if(user != null){

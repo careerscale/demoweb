@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
+import com.pec.demo.model.User;
 import com.pec.demo.util.CommonUtils;
 import com.pec.log.LogFactory;
 
@@ -30,36 +31,20 @@ public class RegistrationDAO {
 		return result;
 	}
 
-	public boolean register(String firstName, String lastName, String userName,
-			String password, String email, String dob) throws Exception {
+	public boolean register(User user) throws Exception {
 		con = ConnectionManager.getDbConnection();
 		PreparedStatement stmt = con
-				.prepareStatement("insert into user(username, password, first_name, last_name,email_id,dob,status_id) values(?,?,?,?,?,?,1)");
-		stmt.setString(1, userName);
-		stmt.setString(2, CommonUtils.getEncryptedPassword(password));
-		stmt.setString(3, firstName);
-		stmt.setString(4, lastName);
-		stmt.setString(5, email);
-		stmt.setDate(6, CommonUtils.getDateFromString(dob));
+				.prepareStatement("insert into user(username, password, first_name, last_name,email_id,dob,state_id,status_id) values(?,?,?,?,?,?,?,1)");
+		stmt.setString(1, user.getUsername());
+		stmt.setString(2, CommonUtils.getEncryptedPassword(user.getPassword()));
+		stmt.setString(3, user.getFirstName());
+		stmt.setString(4, user.getLastName());
+		stmt.setString(5, user.getEmailId());
+		stmt.setDate(6, CommonUtils.getDateFromString(user.getDob()));
+		stmt.setInt(7, Integer.parseInt(user.getState()));
 
 		return stmt.execute();
 
-	}
-
-	/*
-	 * username password first_name last_name dob email_id address_line
-	 * profession_id state_id
-	 */
-
-	public static void main(String[] args) {
-		RegistrationDAO dao = new RegistrationDAO();
-		try {
-			dao.register("hari1", "mallepally", "harinath1", "test",
-					"hari@harinath.in", "12/10/2012");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

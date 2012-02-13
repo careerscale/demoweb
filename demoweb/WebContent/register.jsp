@@ -66,7 +66,6 @@
 											dob : {
 												required : true,
 												minlength : 10
-												
 											},
 
 											messages : {
@@ -163,7 +162,7 @@
 
 							<p>
 								<label for="dob">Birth Date</label> <input id="dob" name="dob"
-									type="date" maxlength="10" />
+									maxlength="10" />
 							</p>
 							<p>
 								<label for="state">State</label> <select name="state">
@@ -177,7 +176,7 @@
 							<p>
 								<label for="agree">Please agree to our <a
 									href="terms.jsp" target="_blank"> policy </a></label> <input
-									type="checkbox" class="checkbox" id="agree" name="agree" />
+									type="checkbox" class="checkbox" id="agree" name="agree" /><br />
 							</p>
 							<p>
 								<input class="submit" type="submit" value="Submit" />
@@ -186,9 +185,6 @@
 				</form>
 
 			</td>
-		</tr>
-		<tr>
-			<td><%@include file='howto.html'%></td>
 		</tr>
 		<tr>
 			<td><%@include file='footer.jsp'%></td>

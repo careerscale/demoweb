@@ -1,7 +1,6 @@
 package com.pec.demo.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.pec.demo.dao.LoginDAO;
 import com.pec.demo.service.LoginService;
 import com.pec.log.LogFactory;
 
@@ -55,6 +53,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				service.sendPasswordDetails(username);
 			} catch (Exception e) {
+				logger.error("authentication failed for " + username, e);
 				request.setAttribute("error", e.getMessage());
 			}
 			RequestDispatcher dispatcher = getServletContext()
@@ -63,15 +62,13 @@ public class LoginServlet extends HttpServlet {
 			return;
 
 		}
-
-		LoginDAO dao = new LoginDAO();
 		boolean loginStatus = false;
 		try {
-			loginStatus = dao.login(username, password);
+			loginStatus = service.login(username, password);
 		} catch (Exception e) {
 			logger.error("Error while login ", e);
+			loginStatus =false;			
 		}
-
 		HttpSession session = request.getSession();
 		if (loginStatus == true) {
 			session.setAttribute("username", username);
@@ -79,8 +76,7 @@ public class LoginServlet extends HttpServlet {
 					.getRequestDispatcher("/home.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			// session.setAttribute("error",
-			// "User name or password is invalid");
+			logger.info("Login failed for user " + username);
 			request.setAttribute("error", "User name or password is invalid");
 			RequestDispatcher dispatcher = getServletContext()
 					.getRequestDispatcher("/login.jsp");

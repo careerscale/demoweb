@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Demo Login Page</title>
+<title>DemoWeb Home Page</title>
 <link rel="stylesheet" type="text/css" href="css/demo.css" />
 
 </head>
@@ -16,12 +16,11 @@
 					</tr>
 					<tr>
 						<td>
-							<div class="headerDiv">Welcome to Demo Login</div> <!-- Site navigation menu -->
+							<div class="headerDiv">Welcome to DemoWeb Home page</div> <!-- Site navigation menu -->
 							<!--  Change the links and the text as needed -->
 							<ul class="navbar">
-								<li><a href="index.html">Home page</a>
-								<li><a href="musings.html">Musings</a>
-								<li><a href="town.html">My town</a>
+								<li><a href="index.jsp">Home page</a>
+								<li><a href="howto.html">How to</a>								
 								<li><a href="links.html">Links</a>
 							</ul> <!-- Main content -->
 							<h1>Demo Home page with styles applied</h1>
@@ -49,9 +48,6 @@
               </td>
               </tr>
 				</table>
-
-</body>
-</html>
 
 </body>
 </html>

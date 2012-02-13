@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Demo Login Page</title>
 <%@include file='common.jsp'%>
+
 <script type="text/javascript">
 	$()
 			.ready(
@@ -41,56 +42,49 @@
 <body>
 	<table width="960px" align="center">
 		<tr valign='top'>
-			<td width="100px"><%@include file='sidebar.jsp'%></td>
-			<td><table>
-					<tr>
-						<td><%@include file='header.jsp'%></td>
-					</tr>
-					<tr>
-						<td>
-							<div class="headerDiv">Welcome to Demo Login</div>
-							<form class="cmxform" id="loginForm" method="post" action="login">
-								<fieldset>
-									<legend>Welcome to Demo registration form</legend>
-
-									<!--  Let us show errors here -->
-									<div class="errorMessage" align="center">
-										<%
-											if (request.getAttribute("error") != null) {
-												out.print(request.getAttribute("error"));
-											}
-										%>
-									</div>									
-									<p>
-										<label for="username">Username</label> <input id="username"
-											name="username"
-											value=<%=request.getParameter("username") == null ? "''" : "'"
-					+ request.getParameter("username") + "'"%> />
-									</p>
-									<p>
-										<label for="password">Password</label> <input id="password"
-											name="password" type="password" />
-									</p>
-									<p>
-										<input class="submit"  type="submit" value="Submit"  name="submit" /> &nbsp; &nbsp;&nbsp;
-										<input class="cancel"  type="submit" name="forgot" value="Forgot Password" />
-									</p>
-									<p>
-										Do not have account? <a href="register">Click Here</a> to create one.
-									</p>
-								</fieldset>
-							</form>
-
-						</td>
-					</tr>
-					<tr>
-						<td><%@include file='howto.html'%></td>
-					</tr>
-					<tr>
-						<td><%@include file='footer.jsp'%></td>
-					</tr>
-				</table></td>
+			<td><%@include file='header.jsp'%></td>
 		</tr>
+		<tr>
+			<td>
+				<div class="headerDiv">Welcome to Demo Login</div>
+				<form class="cmxform" id="loginForm" method="post" action="login">
+					<fieldset>
+						<legend>Welcome to Demo registration form</legend>
+
+						<!--  Let us show errors here -->
+						<div class="errorMessage" align="center">
+							<%
+								if (request.getAttribute("error") != null) {
+									out.print(request.getAttribute("error"));
+								}
+							%>
+						</div>
+						<p>
+							<label for="username">Username</label> <input id="username"
+								name="username"
+								value=<%=request.getParameter("username") == null ? "''" : "'"
+					+ request.getParameter("username") + "'"%> />
+						</p>
+						<p>
+							<label for="password">Password</label> <input id="password"
+								name="password" type="password" />
+						</p>
+						<p>
+							<input class="submit" type="submit" value="Submit" name="submit" />
+							&nbsp; &nbsp;&nbsp; <input class="cancel" type="submit"
+								name="forgot" value="Forgot Password" />
+						</p>
+						<p>
+							Do not have account? <a href="register">Click Here</a> to create
+							one.
+						</p>
+					</fieldset>
+				</form>
+
+			</td>
+		</tr>
+		<tr>
+			<td><%@include file='footer.jsp'%></td>
 	</table>
 
 
