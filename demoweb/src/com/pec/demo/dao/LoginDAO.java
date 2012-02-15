@@ -2,6 +2,7 @@ package com.pec.demo.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.apache.log4j.Logger;
@@ -40,10 +41,14 @@ public class LoginDAO {
 		//ResultSet results =stmt.executeQuery("select * from user where username='" + username + "'");
 		
 		while(results.next()){
-			user = new User(results.getString("username"),results.getString("email_id"),results.getString("first_name"),results.getString("last_name"));
+			user = new User(results.getString("username"),results.getString("email_id"),results.getString("first_name"),results.getString("last_name"), null, null);
 		}
-		}catch(Exception e){
+		}catch(SQLException e){
+			logger.error("jdbc exception", e);
 			
+		} catch (Exception e) {
+			
+			logger.error("unknown exception", e);
 		}
 		return user;
 

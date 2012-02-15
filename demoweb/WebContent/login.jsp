@@ -49,7 +49,7 @@
 				<div class="headerDiv">Welcome to Demo Login</div>
 				<form class="cmxform" id="loginForm" method="post" action="login">
 					<fieldset>
-						<legend>Welcome to Demo registration form</legend>
+						<legend>Welcome to Demo login form</legend>
 
 						<!--  Let us show errors here -->
 						<div class="errorMessage" align="center">
