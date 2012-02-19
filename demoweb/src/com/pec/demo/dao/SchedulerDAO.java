@@ -89,25 +89,48 @@ public class SchedulerDAO {
 	}
 
 	public void createMail(Mail mail) throws ApplicationException {
-		
+
 		try {
 			Connection con = ConnectionManager.getDbConnection();
-		//	Statement stmt = con.createStatement();			
-		//	stmt.execute("insert into  mail(to_email, subject, mail_body) values (' " + mail.getToEmail() + "'  ,  '" + mail.getSubject() + "', ' " + mail.getMessage() + "'" );
-			
-			PreparedStatement pStmt = con.prepareStatement("insert into mail(to_email, subject, mail_body) values (?,?,?)");
+			// Statement stmt = con.createStatement();
+			// stmt.execute("insert into  mail(to_email, subject, mail_body) values (' "
+			// + mail.getToEmail() + "'  ,  '" + mail.getSubject() + "', ' " +
+			// mail.getMessage() + "'" );
+
+			PreparedStatement pStmt = con
+					.prepareStatement(
+							"insert into mail(to_email, subject, mail_body) values (?,?,?)",
+							PreparedStatement.RETURN_GENERATED_KEYS);
 			pStmt.setString(1, mail.getToEmail());
 			pStmt.setString(2, mail.getSubject());
 			pStmt.setString(3, mail.getMessage());
+
+			pStmt.executeUpdate();
+
+			// Let us retrieve the auto generated key value.
+			ResultSet rs = pStmt.getGeneratedKeys();
+			int mailId = rs.next() ? rs.getInt(1) : -1;
+			rs.close();
 			
-			pStmt.execute();
+			if(mailId >=1 && mail.getSchedule()!= null){
+				Schedule schedule = mail.getSchedule();
+				String insertScheduleQuery ="insert into mail_schedule(mail_id, minute, hour, day, month, year) values (?,?,?,?,?,?)";
+				PreparedStatement pStmtSchedule = con.prepareStatement(insertScheduleQuery);
+				pStmtSchedule.setInt(1, mailId);
+				pStmtSchedule.setString(2, schedule.getMinutes());
+				pStmtSchedule.setString(3,schedule.getHours());
+				pStmtSchedule.setString(4,schedule.getDays());
+				pStmtSchedule.setString(5,schedule.getMonths());
+				pStmtSchedule.setString(6,"*");
+				pStmtSchedule.execute();
+				
+			}
 		} catch (Exception e) {
-			
-			throw new ApplicationException("Unable to insert mail content into mail table)");
+			logger.error("Unable to create mail schedule", e);
+			throw new ApplicationException(
+					"Unable to insert mail content into mail table)");
 		}
-		
-		
-		
+
 	}
 
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,13 +61,13 @@
 
 		<tr>
 			<td>
-			
+
 				<form action="scheduler" class="cmxform"
 					name="mailConfigurationForm" id="mailConfigurationForm"
 					method="post">
 					<fieldset>
 						<legend>Configure scheduled emails</legend>
-						
+
 						<!--  Let us show errors here -->
 						<div class="errorMessage" align="center">
 							<%
@@ -73,7 +75,7 @@
 									out.print(request.getAttribute("error"));
 								}
 							%>
-						
+						</div>
 						<p>
 							<label for="toEmail"> To Email</label> <input type="text"
 								id="toEmail" name="toEmail" />
@@ -88,8 +90,50 @@
 							<textarea rows="5" cols="50" id="message" name="message"></textarea>
 						</p>
 						<p>
+							Schedule: <br />
+							</p>
+						<p>
+							<label for="minutes">Select Minute value</label> <select
+								name="minutes">
+								<c:forEach items="${minutes}" var="option">
+									<option value="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+
+						</p>
+
+						<p>
+							<label for="hours">Select hour of the day</label> <select
+								name="hours">
+								<c:forEach items="${hours}" var="option">
+									<option value="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+
+						</p>
+
+						<p>
+							<label for="days">Select Day in the month</label> <select
+								name="days">
+								<c:forEach items="${days}" var="option">
+									<option value="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+						</p>
+
+						<p>
+							<label for="months">Select month of the year</label> <select
+								name="months">
+								<c:forEach items="${months}" var="option">
+									<option value="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+						</p>
+						<p>
 							<input class="submit" type="submit" value="Submit" name="submit" />
 						</p>
+
+						
 					</fieldset>
 				</form>
 
@@ -98,5 +142,6 @@
 		<tr>
 			<td><%@include file="footer.jsp"%></td>
 		</tr>
+	</table>
 </body>
 </html>
