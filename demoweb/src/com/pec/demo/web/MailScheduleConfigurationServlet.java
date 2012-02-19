@@ -65,9 +65,9 @@ public class MailScheduleConfigurationServlet extends HttpServlet {
 			
 		}
 		
-		//request.setAttribute("message", e.getMessage());
+		request.setAttribute("error", "Mail has been created successfully");
 		RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/index.jsp");
+				.getRequestDispatcher("/mail.jsp");
 		dispatcher.forward(request, response);
 	
 	

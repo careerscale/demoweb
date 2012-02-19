@@ -123,6 +123,47 @@ CREATE  TABLE IF NOT EXISTS `email_template` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `mail`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mail` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `to_email` VARCHAR(150) NULL ,
+  `subject` VARCHAR(250) NULL ,
+  `mail_body` VARCHAR(5000) NULL ,
+  `user_id` INT NULL ,
+  `from_email` VARCHAR(150) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_mail_user_id` (`user_id` ASC) ,
+  CONSTRAINT `fk_mail_user_id`
+    FOREIGN KEY (`user_id` )
+    REFERENCES `user` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mail_schedule`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mail_schedule` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `mail_id` INT NULL ,
+  `minute` VARCHAR(1) NULL ,
+  `hour` VARCHAR(1) NULL ,
+  `day` VARCHAR(1) NULL ,
+  `month` VARCHAR(1) NULL ,
+  `year` VARCHAR(1) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_mail_schedule_mail_id` (`mail_id` ASC) ,
+  CONSTRAINT `fk_mail_schedule_mail_id`
+    FOREIGN KEY (`mail_id` )
+    REFERENCES `mail` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -189,5 +230,23 @@ COMMIT;
 START TRANSACTION;
 USE `demoweb`;
 INSERT INTO `email_template` (`id`, `name`, `template`) VALUES (1, 'registration', 'Dear $$first_name$$, Welcome to demo web application.  Regards, Harinath, Administrator');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mail`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `mail` (`id`, `to_email`, `subject`, `mail_body`, `user_id`, `from_email`) VALUES (1, 'harinathreddy@gmail.com', 'Scheduled mail. discard this mail', 'Hi, this is a scheduled mail for testing, please discard, regards, administrator, demoweb', NULL, NULL);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `mail_schedule`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `demoweb`;
+INSERT INTO `mail_schedule` (`id`, `mail_id`, `minute`, `hour`, `day`, `month`, `year`) VALUES (1, 1, '5', '*', '*', '*', '*');
 
 COMMIT;
