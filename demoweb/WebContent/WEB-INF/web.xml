@@ -59,4 +59,27 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TestServlet</display-name>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.pec.demo.web.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
+  </listener>
+  <servlet>
+    <description></description>
+    <display-name>MailScheduleConfigurationServlet</display-name>
+    <servlet-name>MailScheduleConfigurationServlet</servlet-name>
+    <servlet-class>com.pec.demo.web.MailScheduleConfigurationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MailScheduleConfigurationServlet</servlet-name>
+    <url-pattern>/scheduler</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -50,6 +50,7 @@ public class LoginService {
 			valuesMap.put(EmailTemplates.userName, user.getUsername());
 			String emailBody =EmailTemplates.getEmailMessage(Template.ForgotPassword,valuesMap );
 			EmailSender.sendMailWithSSL("Password activation link", emailBody , user.getEmailId());
+			//dao.setActivationCode(username, activationCode);
 		}else{
 			throw new ApplicationException("No valid user found");
 		}

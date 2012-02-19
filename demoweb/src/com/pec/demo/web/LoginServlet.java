@@ -16,6 +16,7 @@ import com.pec.log.LogFactory;
 
 /**
  * Servlet implementation class LoginServlet
+ * This servlet provides login functionality.
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,14 +31,16 @@ public class LoginServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * this is GET implemnetation.
+	 * @author harinath
+	 * @param request The http request parameter.
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher("/login.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.pec.demo.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
@@ -23,6 +24,15 @@ public class ConnectionManager {
 		
 		return DriverManager.getConnection(conString, "root", "secret");
 
+	}
+
+	public static void close(Connection con) {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			logger.error("unable to close connection", e);
+		}
+		
 	}
 
 }
