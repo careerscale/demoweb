@@ -40,7 +40,7 @@
                                 <name>TenSecondIntervals</name>
                                 <job-name>mailJob</job-name>
                                 <repeat-count>-1</repeat-count> <!-- repeat forever  -->
-                                <repeat-interval>60000</repeat-interval>  <!--  every 10 seconds -->
+                                <repeat-interval>300000</repeat-interval>  <!--  every 10 seconds -->
                         </simple>
                 </trigger>
 
